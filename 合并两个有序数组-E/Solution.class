@@ -1,0 +1,28 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+      // 整体采用逆向双指针，从后面开始
+      // 声明指针1 位置为 m -1处(索引，所以需要减1)， 指针2为 n - 1处;
+        int p1 = m - 1, p2 = n - 1;
+        // 数组最后的一个索引，m + n - 1 = 0的时候表示 后面的移动完了。
+        int tail = m + n - 1;
+        // 声明临时变量
+        int cur;
+        // 只要nums1的有效值没有便利完，或者nums2的有效值没有遍历完就运行。
+        while (p1 >= 0 || p2 >= 0) {
+          // 如果nums1完， 则从nums2中取值,此时指针2向左移动。
+            if (p1 == -1) {
+                cur = nums2[p2--];
+          // 如果nums2完， 则从nums1中取值,此时指针1向左移动。
+            } else if (p2 == -1) {
+                cur = nums1[p1--];
+          // 如果两个都都没有完，根据当前两个指针取的值，比较大小，取较小者，并且指针移动。
+            } else if (nums1[p1] > nums2[p2]) {
+                cur = nums1[p1--];
+            } else {
+                cur = nums2[p2--];
+            }
+            // 数组最后一个索引赋值，并且移动最后一个索引。
+            nums1[tail--] = cur;
+        }
+    }
+}

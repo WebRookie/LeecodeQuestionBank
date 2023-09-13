@@ -1,0 +1,15 @@
+class MySolution {
+      public int removeElement(int[] nums, int val) {
+        int newArrayLength = 0;
+        int n = nums.length;
+        for(int i = n - 1; i >= 0; i--) {
+            if(nums[i] == val) {
+                int switchValue = nums[i];
+                nums[i] = nums[n - newArrayLength - 1 ];
+                nums[n - newArrayLength -1] = switchValue;
+                newArrayLength++;
+            }
+        }
+        return n - newArrayLength;
+    }
+}
